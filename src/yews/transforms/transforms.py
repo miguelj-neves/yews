@@ -83,7 +83,7 @@ class Normalize(BaseTransform):
     """
     
     def __call__(self, wav):
-        norm = self.max()
+        norm = wav.max()
         return wav/abs(norm)
     
 class ZeroMean(BaseTransform):
