@@ -77,7 +77,15 @@ class SoftClip(BaseTransform):
     def __call__(self, wav):
         return expit(wav * self.scale)
 
-
+class Normalize(BaseTransform):
+    """Normalize data by maximum amplitude
+    
+    """
+    
+    def __call__(self, wav):
+        norm = self.max()
+        return wav/abs(norm)
+    
 class ZeroMean(BaseTransform):
     """Remove mean from each waveforms.
 
