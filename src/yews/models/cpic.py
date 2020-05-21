@@ -220,7 +220,7 @@ class CpicV2(nn.Module):
 class CpicDropout(nn.Module):
     def __init__(self,dropout=0.08):
         super().__init__()
-        if isinstance(scale, float) or isinstance(scale, int):
+        if isinstance(dropout, float):
             self.dropout = dropout
         else:
             raise ValueError("Dropout probability needs to be a float.")
@@ -231,7 +231,7 @@ class CpicDropout(nn.Module):
             nn.Conv1d(3, 16, kernel_size=5, stride=1, padding=26, bias=False),
             nn.BatchNorm1d(16),
             nn.ReLU(),
-            nn.Dropout(p=0.08),
+            nn.Dropout(p=dropout),
             # nn.Sigmoid(),
             nn.MaxPool1d(2)
         )
@@ -241,7 +241,7 @@ class CpicDropout(nn.Module):
             nn.Conv1d(16, 32, kernel_size=5, stride=1, padding=2, bias=False),
             nn.BatchNorm1d(32),
             nn.ReLU(),
-            nn.Dropout(p=0.08),
+            nn.Dropout(p=dropout),
             # nn.Sigmoid(),
             nn.MaxPool1d(2)
         )
@@ -251,7 +251,7 @@ class CpicDropout(nn.Module):
             nn.Conv1d(32, 64, kernel_size=3, stride=1, padding=1, bias=False),
             nn.BatchNorm1d(64),
             nn.ReLU(),
-            nn.Dropout(p=0.08),
+            nn.Dropout(p=dropout),
             nn.MaxPool1d(2)
         )
 
@@ -260,7 +260,7 @@ class CpicDropout(nn.Module):
             nn.Conv1d(64, 64, kernel_size=3, stride=1, padding=1, bias=False),
             nn.BatchNorm1d(64),
             nn.ReLU(),
-            nn.Dropout(p=0.08),
+            nn.Dropout(p=dropout),
             nn.MaxPool1d(2)
         )
 
@@ -269,7 +269,7 @@ class CpicDropout(nn.Module):
             nn.Conv1d(64, 64, kernel_size=3, stride=1, padding=1, bias=False),
             nn.BatchNorm1d(64),
             nn.ReLU(),
-            nn.Dropout(p=0.08),
+            nn.Dropout(p=dropout),
             nn.MaxPool1d(2)
         )
 
@@ -278,7 +278,7 @@ class CpicDropout(nn.Module):
             nn.Conv1d(64, 64, kernel_size=3, stride=1, padding=1, bias=False),
             nn.BatchNorm1d(64),
             nn.ReLU(),
-            nn.Dropout(p=0.08),
+            nn.Dropout(p=dropout),
             nn.MaxPool1d(2)
         )
 
@@ -287,7 +287,7 @@ class CpicDropout(nn.Module):
             nn.Conv1d(64, 64, kernel_size=3, stride=1, padding=1, bias=False),
             nn.BatchNorm1d(64),
             nn.ReLU(),
-            nn.Dropout(p=0.08),
+            nn.Dropout(p=dropout),
             nn.MaxPool1d(2)
         )
 
@@ -296,7 +296,7 @@ class CpicDropout(nn.Module):
             nn.Conv1d(64, 64, kernel_size=3, stride=1, padding=1, bias=False),
             nn.BatchNorm1d(64),
             nn.ReLU(),
-            nn.Dropout(p=0.08),
+            nn.Dropout(p=dropout),
             nn.MaxPool1d(2)
         )
 
@@ -305,7 +305,7 @@ class CpicDropout(nn.Module):
             nn.Conv1d(64, 64, kernel_size=3, stride=1, padding=1, bias=False),
             nn.BatchNorm1d(64),
             nn.ReLU(),
-            nn.Dropout(p=0.08),
+            nn.Dropout(p=dropout),
             nn.MaxPool1d(2)
         )
 
@@ -314,7 +314,7 @@ class CpicDropout(nn.Module):
             nn.Conv1d(64, 64, kernel_size=3, stride=1, padding=1, bias=False),
             nn.BatchNorm1d(64),
             nn.ReLU(),
-            nn.Dropout(p=0.08),
+            nn.Dropout(p=dropout),
             nn.MaxPool1d(2)
         )
 
@@ -323,7 +323,7 @@ class CpicDropout(nn.Module):
             nn.Conv1d(64, 64, kernel_size=3, stride=1, padding=1, bias=False),
             nn.BatchNorm1d(64),
             nn.ReLU(),
-            nn.Dropout(p=0.08),
+            nn.Dropout(p=dropout),
             nn.MaxPool1d(2)
         )
 
