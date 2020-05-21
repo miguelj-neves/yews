@@ -15,6 +15,7 @@ __all__ = [
     "ZeroMean",
     "CutWaveform",
     "SoftClip",
+    "Normalize",
 ]
 
 class ToTensor(BaseTransform):
