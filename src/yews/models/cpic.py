@@ -218,9 +218,12 @@ class CpicV2(nn.Module):
         return out
     
 class CpicDropout(nn.Module):
-    def __init__(self):
+    def __init__(self,dropout=0.08):
         super().__init__()
-        
+        if isinstance(scale, float) or isinstance(scale, int):
+            self.dropout = dropout
+        else:
+            raise ValueError("Dropout probability needs to be a float.")
         # Add dropout at each layer
         
         # 2000 -> 1024
@@ -378,7 +381,7 @@ def cpic_v2(pretrained=False, progress=True, **kwargs):
     return model
 
 
-def cpicv1_dropout(pretrained=False, progress=True, **kwargs):
+def cpicv1_dropout(pretrained=False, progress=True, dropout=0.08, **kwargs):
     r"""Original CPIC model architecture from the
     `"Deep learning for ..." <https://arxiv.org/abs/1901.06396>`_ paper. The
     pretrained model is trained on 60,000 Wenchuan aftershock dataset
@@ -388,7 +391,7 @@ def cpicv1_dropout(pretrained=False, progress=True, **kwargs):
         pretrained (bool): If True, returns a model pre-trained on Wenchuan)
         progress (bool): If True, displays a progress bar of the download to stderr
     """
-    model = CpicDropout(**kwargs)
+    model = CpicDropout(dropout=dropout, **kwargs)
     if pretrained:
         state_dict = load_state_dict_from_url(model_urls['cpicv1_dropout'],
                                               progress=progress)
