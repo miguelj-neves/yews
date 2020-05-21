@@ -3,7 +3,7 @@ import torch.nn as nn
 
 from .utils import load_state_dict_from_url
 
-__all__ = ['CpicV1', 'CpicV2', 'cpic_v1', 'cpic_v2','cpicv1_dropout']
+__all__ = ['CpicV1', 'CpicV2', 'cpic_v1', 'cpic_v2','cpicv1_dropout', 'CpicDropout']
 
 model_urls = {
     'cpic_v1': 'https://www.dropbox.com/s/ckb4glf35agi9xa/cpic_v1_wenchuan-bdd92da2.pth?dl=1',
