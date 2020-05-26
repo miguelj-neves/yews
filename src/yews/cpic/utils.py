@@ -22,7 +22,7 @@ def chunks(array, size, offset=0):
     axis_length = array.shape[slice_axis]
     for i in range(0, axis_length - offset, size - offset):
         range_end = min(i + size, axis_length)
-        yield np.take(array,indices=range(i, range_end), axis=slice_axis)
+        yield array.take(indices=range(i, range_end), axis=slice_axis)
 
 def compute_probs(model, transform, waveform, shape, step, batch_size=None):
     model.eval()
