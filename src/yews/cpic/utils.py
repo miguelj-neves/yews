@@ -13,7 +13,7 @@ def probs2cfs(probs, sigma=3):
 
     return cf_p, cf_s
 
-def chunks(array, size, offset=0):
+def chunks(l, n):
     """Yield successive n-sized chunks from l."""
     for i in range(0, len(l), n):
         yield l[i:i + n]
