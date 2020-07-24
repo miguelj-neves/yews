@@ -346,7 +346,7 @@ class CpicDropout(nn.Module):
 
         return out
     
-def cpic_v1(pretrained=False, progress=True, **kwargs):
+def cpic_v1(pretrained=False, progress=True, path=None, **kwargs):
     r"""Original CPIC model architecture from the
     `"Deep learning for ..." <https://arxiv.org/abs/1901.06396>`_ paper. The
     pretrained model is trained on 60,000 Wenchuan aftershock dataset
@@ -358,9 +358,9 @@ def cpic_v1(pretrained=False, progress=True, **kwargs):
     """
     model = CpicV1(**kwargs)
     if pretrained:
-        state_dict = load_state_dict_from_url(model_urls['cpic_v1'],
-                                              progress=progress)
-        model.load_state_dict(state_dict)
+        #state_dict = load_state_dict_from_url(model_urls['cpic_v1'],
+        #                                      progress=progress)
+        model.load_state_dict(path)
     return model
 
 def cpic_v2(pretrained=False, progress=True, **kwargs):
