@@ -1,5 +1,6 @@
 # TO-DO: need to add model_zoo utility and pretrained models.
 import torch.nn as nn
+from torch import load
 
 from .utils import load_state_dict_from_url
 
