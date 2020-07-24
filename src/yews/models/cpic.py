@@ -359,9 +359,7 @@ def cpic_v1(pretrained=False, progress=True, path=None, **kwargs):
     """
     model = CpicV1(**kwargs)
     if pretrained:
-        model_pth = load(path)["model"]
-        model = cpic(pretrained = False)
-        model.load_state_dict(model_pth)
+        model.load_state_dict(path)
         #state_dict = load_state_dict_from_url(model_urls['cpic_v1'],
         #                                      progress=progress)
         #model.load_state_dict(path)
