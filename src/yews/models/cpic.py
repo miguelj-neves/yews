@@ -362,7 +362,7 @@ def cpic_v1(pretrained=False, progress=True, path=None, **kwargs):
     model = CpicV1(**kwargs)
     if pretrained:
         if path != None:
-            model.load_state_dict(load(path))
+            model.load_state_dict(load(path)['model'])
         else:
             state_dict = load_state_dict_from_url(model_urls['cpic_v1'],
                                                   progress=progress)
@@ -400,7 +400,7 @@ def cpicv1_dropout(pretrained=False, progress=True, dropout=0.08, path=None, **k
     model = CpicDropout(dropout=dropout, **kwargs)
     if pretrained:
         if path != None:
-            model.load_state_dict(load(path))
+            model.load_state_dict(load(path)['model'])
         else:
             state_dict = load_state_dict_from_url(model_urls['cpicv1_dropout'],
                                                   progress=progress)
