@@ -377,7 +377,7 @@ class CpicIberia(nn.Module):
         )
         
         self.layer3 = nn.Sequential(
-            nn.Conv1d(32, 32, kernel_size=3, stride=1, padding=2, bias=False),
+            nn.Conv1d(32, 32, kernel_size=3, stride=1, padding=1, bias=False),
             nn.BatchNorm1d(32),
             nn.ReLU(),
             nn.Dropout(p=dropout),
