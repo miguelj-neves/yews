@@ -480,6 +480,7 @@ class CpicIberia(nn.Module):
         out = self.layer9(out)
         out = self.layer10(out)
         out = self.layer11(out)
+        out = self.layer12(out)
         out = out.view(out.size(0), -1)
         out = self.fc(out)
 
