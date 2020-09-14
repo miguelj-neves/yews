@@ -382,7 +382,7 @@ class CpicIberia(nn.Module):
             nn.ReLU(),
             nn.Dropout(p=dropout),
             # nn.Sigmoid(),
-            nn.MaxPool1d(1)
+            #nn.MaxPool1d(1)
         )
 
         # 512 -> 256
