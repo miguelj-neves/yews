@@ -11,7 +11,7 @@ def pick_arrivals(cf):
     for i in range(10):
         #prom /= 2
         peaks, properties = find_peaks(x=cf, height=7*mad,
-                                       distance=2, prominence=None)
+                                       distance=2, prominence=0.01)
 
         if peaks.size > 0:
             peak_prom = properties['prominences']
