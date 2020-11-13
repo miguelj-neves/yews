@@ -1,15 +1,17 @@
 import numpy as np
 from scipy.signal import find_peaks
+from scipy.stats import median_absolute_deviation
 
 from .utils import compute_probs
 from .utils import probs2cfs
 
 def pick_arrivals(cf):
-    prom = cf.max()
+    #prom = cf.max()
+    mad = median_absolute_deviation(cf)
     for i in range(10):
         prom /= 2
-        peaks, properties = find_peaks(x=cf, height=0,
-                                       distance=10, prominence=prom)
+        peaks, properties = find_peaks(x=cf, height=7*mad,
+                                       distance=2, prominence=None)
 
         if peaks.size > 0:
             peak_prom = properties['prominences']
