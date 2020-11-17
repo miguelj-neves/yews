@@ -124,7 +124,7 @@ class BandpassFilter(BaseTransform):
         #nyq = 0.5 * (1 / delta)
         low = lowfreq # / nyq
         high = highfreq # / nyq
-        sos = signal.butter(order, [low, high], btype='bandpass',output='sos')
+        sos = signal.butter(order, [low, high], btype='bandpass',output='sos',fs=1/delta)
         wav = signal.filtfilt(sos, wav) #, axis=-1, padtype=None, padlen=None, irlen=None)
 
         return wav
