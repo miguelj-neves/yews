@@ -119,12 +119,12 @@ class Taper(BaseTransform):
 class BandpassFilter(BaseTransform):
     """Apply Bandpass filter to each waveforms.
     """
-    def __call__(self, wav, delta=0.01, order = 4, lowfreq = 2, highfreq = 16 ):
+    def __call__(self, wav, delta=0.01, order = 4, lowfreq = 0.5, highfreq = 16 ):
 
-        nyq = 0.5 * (1 / delta)
-        low = lowfreq / nyq
-        high = highfreq / nyq
-        b, a = signal.butter(order, [low, high], btype='bandpass')
-        wav = signal.filtfilt(b, a, wav, axis=-1, padtype=None, padlen=None, irlen=None)
+        #nyq = 0.5 * (1 / delta)
+        low = lowfreq # / nyq
+        high = highfreq # / nyq
+        sos = signal.butter(order, [low, high], btype='bandpass',output='sos')
+        wav = signal.filtfilt(sos, wav) #, axis=-1, padtype=None, padlen=None, irlen=None)
 
         return wav
