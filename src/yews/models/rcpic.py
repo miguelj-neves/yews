@@ -11,7 +11,6 @@ __all__ = ["RCpicV1", "rcpic_v1", 'cpicv1_dropout', 'CpicDropout']
 #    "cpic_v3": "",
 #}
 
-
 class RCpicV1(nn.Module):
     def __init__(self):
         super().__init__()
@@ -65,9 +64,11 @@ class RCpicV1(nn.Module):
             nn.MaxPool1d(2),
         )
         
-        self.fc = nn.Linear(64 * 64, 64)
+        self.fc1 = nn.Linear(64 * 64, 64)
         
-        self.lstm = nn.LSTM(input_size=64,hidden_size=,num_layers=2,dropout=0,bidirectional=True)
+        self.lstm = nn.LSTM(input_size=64,hidden_size=32,num_layers=3,dropout=0.5,bidirectional=True)
+        
+        self.fc2 = nn.Linear(64 * 64, 3)
 
         # 64 -> 32
         #self.layer7 = nn.Sequential(
@@ -132,8 +133,9 @@ class RCpicV1(nn.Module):
         #out = self.layer10(out)
         #out = self.layer11(out)
         out = out.view(out.size(0), -1)
-        out = self.fc(out)
+        out = self.fc1(out)
         out = self.lstm(out)
+        out = self.fc2(out)
 
         return out
     
