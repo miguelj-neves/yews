@@ -64,7 +64,7 @@ class RCpicV1(nn.Module):
             nn.MaxPool1d(2),
         )
         
-        self.fc1 = nn.Linear(64 * 64, 64)
+        self.fc1 = nn.Linear(64 , 64)
         
         self.lstm1 = nn.LSTM(input_size=64,hidden_size=32,num_layers=2,dropout=0.5,bidirectional=True)
         #self.lstm2 = nn.LSTM(input_size=64,hidden_size=16,num_layers=1,dropout=0.4,bidirectional=True)
