@@ -14,6 +14,17 @@ def probs2cfs(probs, sigma=3):
 
     return cf_p, cf_s
 
+def probs2result(probs, sigma=3):
+    prob_p = probs[1]
+    prob_s = probs[2]
+    prob_p[probs.argmax(axis=0) != 1] = 0
+    prob_s[probs.argmax(axis=0) != 2] = 0
+    
+    prob_p = gaussian_filter1d(prob_p, sigma=sigma)
+    prob_s = gaussian_filter1d(prob_s, sigma=sigma)
+    
+    return prob_p, prob_s
+
 
 def chunks(inputs, size, offset=0):
     if not (isinstance(size, int) and isinstance(offset, int)):
