@@ -3,7 +3,7 @@ from scipy.signal import find_peaks
 from scipy.stats import median_absolute_deviation
 
 from .utils import compute_probs
-from .utils import probs2cfs
+from .utils import probs2cfs, probs2result
 
 def pick_arrivals(cf):
     #prom = cf.max()
