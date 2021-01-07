@@ -142,7 +142,7 @@ class Trainer(object):
         print("Validation on training set.")
         acc, loss = self.validate(train_loader)
         self.update_train_results(acc, loss)
-        print("Validation on valiation set.")
+        print("Validation on validation set.")
         acc, loss = self.validate(val_loader)
         self.update_val_results(acc, loss)
 
@@ -174,4 +174,4 @@ class Trainer(object):
                 self.save_checkpoint(path='checkpoint_best.pth.tar')
 
         # training finished
-        print(f"Training fisihed. Best accuracy is {self.best_acc}")
+        print(f"Training finished. Best accuracy is {self.best_acc}")
