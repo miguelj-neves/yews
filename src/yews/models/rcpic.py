@@ -70,7 +70,7 @@ class RCpicV1(nn.Module):
         #self.lstm2 = nn.LSTM(input_size=64,hidden_size=16,num_layers=1,dropout=0.4,bidirectional=True)
         self.lstm3 = nn.LSTM(input_size=64,hidden_size=8,num_layers=1,dropout=0,bidirectional=True)
         
-        self.fc2 = nn.Linear(16, 3)
+        self.fc2 = nn.Linear(64*16, 3)
 
         # 64 -> 32
         #self.layer7 = nn.Sequential(
@@ -140,8 +140,10 @@ class RCpicV1(nn.Module):
         
         out = self.fc1(out)
         print(out.size())
+        self.lstm1.flatten_parameters()
         out, (hn, cn) = self.lstm1(out)
         #out = self.lstm2(out)
+        self.lstm3.flatten_parameters()
         out, (hn, cn) = self.lstm3(out)
         print(out.size())
         out = out.view(out.size(0), -1)
