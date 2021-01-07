@@ -10,8 +10,8 @@ def pick_arrivals(cf):
     mad = median_absolute_deviation(cf)
     for i in range(10):
         #prom /= 2
-        peaks, properties = find_peaks(x=cf, height=7*mad,
-                                       distance=2, prominence=0.01)
+        peaks, properties = find_peaks(x=cf, height=15*mad,
+                                       distance=2, prominence=0.1)
 
         if peaks.size > 0:
             peak_prom = properties['prominences']
@@ -41,6 +41,30 @@ def pick(waveform, fs, wl, model, transform, g=0.1, batch_size=None):
         's_conf': confidences_s,
         'cf_p': cf_p,
         'cf_s': cf_s
+    }
+
+    return pick_results
+
+def prob_pick(waveform, fs, wl, model, transform, g=0.1, batch_size=None):
+    probs = compute_probs(model, transform, waveform,
+                          shape=[3, fs * wl],
+                          step=[1, int(g * fs)],
+                          batch_size=batch_size)
+
+    # compute cf
+    prob_p, prob_s = probs2result(probs)
+
+    # find prominent local peaks
+    peaks_p, confidences_p = pick_arrivals(prob_p)
+    peaks_s, confidences_s = pick_arrivals(prob_s)
+
+    pick_results = {
+        'p': peaks_p * g + 5,
+        's': peaks_s * g + 5,
+        'p_conf': confidences_p,
+        's_conf': confidences_s,
+        'cf_p': prob_p,
+        'cf_s': prob_s
     }
 
     return pick_results
