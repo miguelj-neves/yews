@@ -16,9 +16,9 @@ def pick_arrivals(cf):
         if peaks.size > 0:
             peak_prom = properties['prominences']
             confidences = peak_prom / peak_prom.sum()
-            return peaks, confidences
+            return peaks, confidences, mad
 
-    return (np.nan, np.nan)
+    return (np.nan, np.nan, np.nan)
 
 
 def pick(waveform, fs, wl, model, transform, g=0.1, batch_size=None):
@@ -55,8 +55,8 @@ def prob_pick(waveform, fs, wl, model, transform, g=0.1, batch_size=None):
     prob_p, prob_s = probs2result(probs)
 
     # find prominent local peaks
-    peaks_p, confidences_p = pick_arrivals(prob_p)
-    peaks_s, confidences_s = pick_arrivals(prob_s)
+    peaks_p, confidences_p, madp = pick_arrivals(prob_p)
+    peaks_s, confidences_s, mads = pick_arrivals(prob_s)
 
     pick_results = {
         'p': peaks_p * g + 5,
@@ -64,7 +64,9 @@ def prob_pick(waveform, fs, wl, model, transform, g=0.1, batch_size=None):
         'p_conf': confidences_p,
         's_conf': confidences_s,
         'cf_p': prob_p,
-        'cf_s': prob_s
+        'cf_s': prob_s,
+        'madp': madp,
+        'mads': mads
     }
 
     return pick_results
