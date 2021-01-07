@@ -140,9 +140,9 @@ class RCpicV1(nn.Module):
         
         out = self.fc1(out)
         print(out.size())
-        out = self.lstm1(out)
+        out, (hn, cn) = self.lstm1(out)
         #out = self.lstm2(out)
-        out = self.lstm3(out)
+        out, (hn, cn) = self.lstm3(out)
         print(out.size())
         out = out.view(out.size(0), -1)
         print(out.size())
