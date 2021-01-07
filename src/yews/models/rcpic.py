@@ -124,6 +124,7 @@ class RCpicV1(nn.Module):
 
     def forward(self, x):
         out = self.layer1(x)
+        print(out.size())
         out = self.layer2(out)
         out = self.layer3(out)
         out = self.layer4(out)
@@ -134,6 +135,7 @@ class RCpicV1(nn.Module):
         #out = self.layer9(out)
         #out = self.layer10(out)
         #out = self.layer11(out)
+        print(out.size())
         out = out.view(out.size(0), -1)
         out = self.fc1(out)
         out = self.lstm1(out)
