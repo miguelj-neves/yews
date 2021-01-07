@@ -24,8 +24,8 @@ class RCpicV1(nn.Module):
         )
         # 2000 -> 1024
         self.layer2 = nn.Sequential(
-            nn.Conv1d(3, 16, kernel_size=5, stride=1, padding=26, bias=False),
-            nn.BatchNorm1d(16),
+            nn.Conv1d(16, 32, kernel_size=5, stride=1, padding=26, bias=False),
+            nn.BatchNorm1d(32),
             nn.ReLU(),
             # nn.Sigmoid(),
             nn.MaxPool1d(2),
@@ -33,8 +33,8 @@ class RCpicV1(nn.Module):
 
         # 1024 -> 512
         self.layer3 = nn.Sequential(
-            nn.Conv1d(16, 32, kernel_size=5, stride=1, padding=2, bias=False),
-            nn.BatchNorm1d(32),
+            nn.Conv1d(32, 64, kernel_size=5, stride=1, padding=2, bias=False),
+            nn.BatchNorm1d(64),
             nn.ReLU(),
             # nn.Sigmoid(),
             nn.MaxPool1d(2),
@@ -42,7 +42,7 @@ class RCpicV1(nn.Module):
 
         # 512 -> 256
         self.layer4 = nn.Sequential(
-            nn.Conv1d(32, 64, kernel_size=3, stride=1, padding=1, bias=False),
+            nn.Conv1d(64, 64, kernel_size=3, stride=1, padding=1, bias=False),
             nn.BatchNorm1d(64),
             nn.ReLU(),
             nn.MaxPool1d(2),
@@ -50,25 +50,25 @@ class RCpicV1(nn.Module):
 
         # 256 -> 128
         self.layer5 = nn.Sequential(
-            nn.Conv1d(64, 64, kernel_size=3, stride=1, padding=1, bias=False),
-            nn.BatchNorm1d(64),
+            nn.Conv1d(64, 128, kernel_size=3, stride=1, padding=1, bias=False),
+            nn.BatchNorm1d(128),
             nn.ReLU(),
             nn.MaxPool1d(2),
         )
 
         # 128 -> 64
         self.layer6 = nn.Sequential(
-            nn.Conv1d(64, 64, kernel_size=3, stride=1, padding=1, bias=False),
-            nn.BatchNorm1d(64),
+            nn.Conv1d(128, 128, kernel_size=3, stride=1, padding=1, bias=False),
+            nn.BatchNorm1d(128),
             nn.ReLU(),
             nn.MaxPool1d(2),
         )
         
-        self.fc1 = nn.Linear(64 * 64, 64)
+        self.fc1 = nn.Linear(128 * 128, 64)
         
-        self.lstm1 = nn.LSTM(input_size=64,hidden_size=32,num_layers=1,dropout=0.5,bidirectional=True)
-        self.lstm2 = nn.LSTM(input_size=64,hidden_size=16,num_layers=1,dropout=0.4,bidirectional=True)
-        self.lstm3 = nn.LSTM(input_size=32,hidden_size=8,num_layers=1,dropout=0,bidirectional=True)
+        self.lstm1 = nn.LSTM(input_size=64,hidden_size=32,num_layers=2,dropout=0.5,bidirectional=True)
+        #self.lstm2 = nn.LSTM(input_size=64,hidden_size=16,num_layers=1,dropout=0.4,bidirectional=True)
+        self.lstm3 = nn.LSTM(input_size=64,hidden_size=8,num_layers=1,dropout=0,bidirectional=True)
         
         self.fc2 = nn.Linear(16, 3)
 
@@ -137,7 +137,7 @@ class RCpicV1(nn.Module):
         out = out.view(out.size(0), -1)
         out = self.fc1(out)
         out = self.lstm1(out)
-        out = self.lstm2(out)
+        #out = self.lstm2(out)
         out = self.lstm3(out)
         out = out.view(out.size(0), -1)
         out = self.fc2(out)
