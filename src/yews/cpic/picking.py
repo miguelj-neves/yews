@@ -6,6 +6,21 @@ from .utils import compute_probs
 from .utils import probs2cfs, probs2result
 
 def pick_arrivals(cf):
+    prom = cf.max()
+    #mad = median_absolute_deviation(cf)
+    for i in range(10):
+        prom /= 2
+        peaks, properties = find_peaks(x=cf, height=0,
+                                       distance=2, prominence=prom)
+
+        if peaks.size > 0:
+            peak_prom = properties['prominences']
+            confidences = peak_prom / peak_prom.sum()
+            return peaks, confidences
+
+    return (np.nan, np.nan)
+
+def pick_arrivalsp(cf):
     #prom = cf.max()
     #mad = median_absolute_deviation(cf)
     for i in range(10):
@@ -55,8 +70,8 @@ def prob_pick(waveform, fs, wl, model, transform, g=0.1, batch_size=None):
     prob_p, prob_s = probs2result(probs)
 
     # find prominent local peaks
-    peaks_p, confidences_p = pick_arrivals(prob_p)
-    peaks_s, confidences_s = pick_arrivals(prob_s)
+    peaks_p, confidences_p = pick_arrivalsp(prob_p)
+    peaks_s, confidences_s = pick_arrivalsp(prob_s)
 
     pick_results = {
         'p': peaks_p * g + 5,
