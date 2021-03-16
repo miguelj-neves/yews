@@ -7,9 +7,11 @@ from .utils import probs2cfs
 def pick_arrivals(cf):
     prom = cf.max()
     #mad = median_abs_deviation(cf)
+    median = np.median(cf)
+    mad = np.median(abs(cf-median))
     for i in range(2):
         #prom /= 2
-        peaks, properties = find_peaks(x=cf, height=0,
+        peaks, properties = find_peaks(x=cf, height=30*mad,
                                        distance=40, prominence=prom/2)
 
         if peaks.size > 0:
