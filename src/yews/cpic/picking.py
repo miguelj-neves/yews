@@ -1,6 +1,5 @@
 import numpy as np
 from scipy.signal import find_peaks
-from scipy.stats import median_abs_deviation
 
 from .utils import compute_probs
 from .utils import probs2cfs
