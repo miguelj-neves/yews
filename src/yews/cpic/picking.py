@@ -37,8 +37,9 @@ def pick_probs(waveform, fs, wl, model, transform, g=0.1, batch_size=None):
         's': peaks_s * g + 5,
         'p_conf': confidences_p,
         's_conf': confidences_s,
-        'cf_p': cf_p,
-        'cf_s': cf_s
+        'prob_p': probs[1],
+        'prob_s': probs[2],
+        'prob_n': probs[0]
     }
 
     return pick_results
