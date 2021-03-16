@@ -7,10 +7,10 @@ from .utils import probs2cfs
 def pick_arrivals(cf):
     prom = cf.max()
     #mad = median_abs_deviation(cf)
-    for i in range(10):
+    for i in range(2):
         #prom /= 2
-        peaks, properties = find_peaks(x=cf, height=0.3,
-                                       distance=20, prominence=0.1)
+        peaks, properties = find_peaks(x=cf, height=0,
+                                       distance=40, prominence=prom/2)
 
         if peaks.size > 0:
             peak_prom = properties['prominences']
